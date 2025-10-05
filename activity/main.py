@@ -10,25 +10,37 @@ def repeat_bfs(adj_dict):
         # return an empty list
         return []
 
-    # grab the first node in the adjacency dictionary
-    first_node = list(adj_dict.keys())[0]
-    # initialize visited list
-    visited = [first_node]
-    queue = deque([first_node])
 
-    # while there are still nodes in the queue
-    while queue:
-    # pop node off the queue and set it as current
-        current = queue.popleft()
+    # # grab the first node in the adjacency dictionary
+    # first_node = list(adj_dict.keys())[0]
+    # # initialize visited list
+    # visited = [first_node]
+    # queue = deque([first_node])
+
+    visited = []
+    queue = deque([])
+
+    for key in adj_dict.keys():
+        if key in visited:
+            continue
+
+        visited.append(key)
+        queue.append(key)
         
-        # loop through current's neighbors
-        for neighbor in adj_dict[current]:
-            # if the neighbor has not yet been visited
-            if neighbor not in visited:
-                # add it to the list of visited nodes
-                # (we've now visited it!)
-                visited.append(neighbor)
-                # append the node to the queue so we can visit its neighbors!
-                queue.append(neighbor)
+
+        # while there are still nodes in the queue
+        while queue:
+        # pop node off the queue and set it as current
+            current = queue.popleft()
+            
+            # loop through current's neighbors
+            for neighbor in adj_dict[current]:
+                # if the neighbor has not yet been visited
+                if neighbor not in visited:
+                    # add it to the list of visited nodes
+                    # (we've now visited it!)
+                    visited.append(neighbor)
+                    # append the node to the queue so we can visit its neighbors!
+                    queue.append(neighbor)
     # return list of visited nodes
     return visited
